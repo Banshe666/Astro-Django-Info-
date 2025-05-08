@@ -9,9 +9,8 @@ import androidx.compose.ui.Modifier
 import com.gonzalez.banshe66.astrodjangoinfoapp.ui.theme.YouTubePlayerComposable
 import com.gonzalez.banshe66.astrodjangoinfoapp.ui.theme.AstroDjangoInfoAppTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 
-
+// Activity that plays a YouTube video in fullscreen using a custom Composable.
 class VideoPlayerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

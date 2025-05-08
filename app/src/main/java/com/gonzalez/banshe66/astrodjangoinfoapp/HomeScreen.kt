@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 
+// Main home screen with navigation drawer, top bar, and card buttons for Astro and Django sections.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
@@ -27,6 +28,7 @@ fun HomeScreen() {
     var showPreferences by remember { mutableStateOf(false) }
     val viewModel: PreferencesViewModel = viewModel()
 
+    // Navigation drawer with menu options
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -50,6 +52,7 @@ fun HomeScreen() {
             }
         }
     ) {
+        // Scaffold with a top app bar and two clickable card items
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -74,6 +77,7 @@ fun HomeScreen() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Card for Astro section
                 CardItem(
                     title = "Astro",
                     imageRes = R.drawable.astro_logo,
@@ -86,6 +90,7 @@ fun HomeScreen() {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
+                // Card for Django section
                 CardItem(
                     title = "Django",
                     imageRes = R.drawable.djangoproject_logo,
@@ -97,6 +102,7 @@ fun HomeScreen() {
                 )
             }
 
+            // Info dialog
             if (showInfoDialog) {
                 AlertDialog(
                     onDismissRequest = { showInfoDialog = false },
@@ -112,6 +118,7 @@ fun HomeScreen() {
                 )
             }
 
+            // Contact dialog
             if (showContactDialog) {
                 AlertDialog(
                     onDismissRequest = { showContactDialog = false },
@@ -127,6 +134,7 @@ fun HomeScreen() {
                 )
             }
 
+            // Preferences dialog (editable user info)
             if (showPreferences) {
                 AlertDialog(
                     onDismissRequest = { showPreferences = false },
@@ -168,6 +176,7 @@ fun HomeScreen() {
     }
 }
 
+// Reusable menu item for navigation drawer with divider and chevron indicator
 @Composable
 fun MenuItem(text: String, onClick: () -> Unit) {
     Column(
@@ -197,6 +206,7 @@ fun MenuItem(text: String, onClick: () -> Unit) {
     }
 }
 
+// Reusable card component for home screen buttons (Astro and Django)
 @Composable
 fun CardItem(title: String, imageRes: Int, onClick: () -> Unit) {
     Card(

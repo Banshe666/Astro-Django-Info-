@@ -20,12 +20,14 @@ import com.gonzalez.banshe66.astrodjangoinfoapp.model.VideoItem
 import com.gonzalez.banshe66.astrodjangoinfoapp.network.RetrofitClient
 import androidx.compose.material3.Surface
 
-
+// Composable that displays a scrollable list of YouTube videos from a playlist.
+// Fetches data using Retrofit and opens a new activity on video tap.
 @Composable
 fun VideoListScreen(playlistId: String, apiKey: String) {
     var videos by remember { mutableStateOf<List<VideoItem>>(emptyList()) }
     val context = LocalContext.current
 
+    // Fetch videos from the API
     LaunchedEffect(Unit) {
         try {
             val response = RetrofitClient.api.getPlaylistVideos(
@@ -34,10 +36,11 @@ fun VideoListScreen(playlistId: String, apiKey: String) {
             )
             videos = response.items
         } catch (e: Exception) {
-            e.printStackTrace()
+            e.printStackTrace() // Handle errors
         }
     }
 
+    // UI container
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -49,6 +52,7 @@ fun VideoListScreen(playlistId: String, apiKey: String) {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            // Loop through each video and show a clickable card
             items(videos) { video ->
                 VideoCard(video) {
                     val videoId = video.snippet.resourceId.videoId
@@ -61,6 +65,7 @@ fun VideoListScreen(playlistId: String, apiKey: String) {
     }
 }
 
+// Composable that displays a single video thumbnail and title in a card format and opens the video player when clicked.
 @Composable
 fun VideoCard(video: VideoItem, onClick: () -> Unit) {
     Card(
